@@ -23,8 +23,8 @@ class AuthController extends AbstractController
     #[Route('/api/login', name: 'signUpViaGoogle', methods: 'POST')]
     public function signUpViaGoogle(Request $request, JWTTokenManagerInterface $JWTManager, ManagerRegistry $doctrine): Response
     {
-        $userInfo = $request->request;
-        $mail = $userInfo->get('email');
+        $userInfo = $request->query;
+        $mail = $userInfo->get('mail');
         $token = $userInfo->get('token');
         $entityManager = $doctrine->getManager();
 
