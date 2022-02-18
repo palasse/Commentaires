@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>
+		<h1>Bienvenue</h1>
+
+		<p>Connection :
+			<a href="{{ path('connect_google') }}">Google<a/></p>
+		</p>
+		<p>Token :{{session_token}}</p>
+
+		<h2>Les derniers commentaires</h2>
+		<div class="container">
+		{% for comment in  comments %}
+			<div class="row-md-6">
+				<div class="card ">
+					<p>{{comment.content}}</p>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+
+		<hr/>
+		<h2>Les articles</h2>
+		<a href="{{ path('article', {slug:1}) }}">Article 1</a>
+		<br/>
+		<a href="{{ path('article', {slug:2}) }}">Article 2</a>
+	</div>
+</body>
+{% endblock %}

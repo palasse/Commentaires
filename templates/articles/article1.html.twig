@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>
+		<h1>Page 1
+		</h1>
+		<div>
+			<p>Mon article</p>
+		</div>
+
+		<hr/>
+
+		<div class="container">
+			{% for comment in  comments %}
+				<div class="row">
+					<div class="card ">
+						<p>{{comment.content}}</p>
+						{% if comment.commentResponses %}
+							<div class="container">
+								{% for response in  comment.commentResponses %}
+									<div class="row">
+										<div class="card ">
+											<p>{{response.content}}</p>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+						<div class="container">
+							{{ form_start(commentResponseForm[comment.id]) }}
+							<div class="row">
+								<div class="col">
+									{{ form_widget(commentResponseForm[comment.id].text)}}
+								</div>
+								{{ form_row(commentResponseForm[comment.id].send)}}
+								{{ form_widget(commentResponseForm[comment.id].idComment, { 'value': comment.id })}}
+							</div>
+							{{ form_end(commentResponseForm[comment.id])}}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<br/>
+
+	<div class="container">
+		{{ form_start(commentForm) }}
+		<div class="row">
+			<div class="col">
+				{{ form_widget(commentForm.text)}}
+			</div>
+			{{ form_row(commentForm.send)}}
+		</div>
+		{{ form_end(commentForm)}}
+	</div>
+
+	<hr/>
+	<a href="/">Retour</a>
+</body></body>{% endblock %}
